@@ -34,7 +34,7 @@ frame-system = { git = "https://github.com/paritytech/substrate", branch = "polk
 pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.24", default-features = false }
 pallet-timestamp = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.24", default-features = false }
 
-fp-evm = { version = "3.0.0-dev", default-features = false, path = "../../primitives/evm" }
+fp-evm = { version = "3.0.0", default-features = false, path = "../../primitives/evm" }
 
 [features]
 default = ["std"]
