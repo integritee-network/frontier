@@ -256,7 +256,10 @@ impl<T: Config> RunnerT<T> for Runner<T> {
 			|executor| {
 				let address = executor.create_address(evm::CreateScheme::Legacy { caller: source });
 				(
-					executor.transact_create(source, value, init, gas_limit, access_list),
+					// Quick fix for https://github.com/rust-blockchain/evm/pull/91. If upstream changes has a better solution, that's the way to go.
+					executor
+						.transact_create(source, value, init, gas_limit, access_list)
+						.0,
 					address,
 				)
 			},
@@ -293,7 +296,10 @@ impl<T: Config> RunnerT<T> for Runner<T> {
 					salt,
 				});
 				(
-					executor.transact_create2(source, value, init, salt, gas_limit, access_list),
+					// Quick fix. If upstream changes has a better solution, that's the way to go.
+					executor
+						.transact_create2(source, value, init, salt, gas_limit, access_list)
+						.0,
 					address,
 				)
 			},
