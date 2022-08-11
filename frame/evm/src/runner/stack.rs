@@ -103,6 +103,8 @@ impl<T: Config> Runner<T> {
 			.checked_add(total_fee)
 			.ok_or(Error::<T>::PaymentOverflow)?;
 		let source_account = Pallet::<T>::account_basic(&source);
+		log::error!("Source account balances: {:?}", source_account.balance);
+		log::error!("Total payment: {:?}", total_payment);
 		ensure!(
 			source_account.balance >= total_payment,
 			Error::<T>::BalanceLow
