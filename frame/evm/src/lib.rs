@@ -184,9 +184,13 @@ pub mod pallet {
 			nonce: Option<U256>,
 			access_list: Vec<(H160, Vec<H256>)>,
 		) -> DispatchResultWithPostInfo {
+			log::error!("Entering EVM Call");
 			log::error!("Comparing source {:?} and origin", source);
 			T::CallOrigin::ensure_address_origin(&source, origin)?;
 			log::error!("Success");
+
+			log::error!(" -> calling ...");
+
 			let info = T::Runner::call(
 				source,
 				target,
@@ -200,6 +204,8 @@ pub mod pallet {
 				T::config(),
 			)?;
 
+			log::error!(" -> checking info ...");
+
 			match info.exit_reason {
 				ExitReason::Succeed(_) => {
 					Pallet::<T>::deposit_event(Event::<T>::Executed(target));
@@ -208,6 +214,8 @@ pub mod pallet {
 					Pallet::<T>::deposit_event(Event::<T>::ExecutedFailed(target));
 				}
 			};
+
+			log::error!(" -> Finish!");
 
 			Ok(PostDispatchInfo {
 				actual_weight: Some(T::GasWeightMapping::gas_to_weight(
@@ -231,8 +239,10 @@ pub mod pallet {
 			nonce: Option<U256>,
 			access_list: Vec<(H160, Vec<H256>)>,
 		) -> DispatchResultWithPostInfo {
+			log::error!("Entering EVM create ...");
 			T::CallOrigin::ensure_address_origin(&source, origin)?;
 
+			log::error!(" -> Creating ...");
 			let info = T::Runner::create(
 				source,
 				init,
@@ -264,6 +274,8 @@ pub mod pallet {
 				}
 			}
 
+			log::error!(" -> Finish ...");
+
 			Ok(PostDispatchInfo {
 				actual_weight: Some(T::GasWeightMapping::gas_to_weight(
 					info.used_gas.unique_saturated_into(),
@@ -286,7 +298,11 @@ pub mod pallet {
 			nonce: Option<U256>,
 			access_list: Vec<(H160, Vec<H256>)>,
 		) -> DispatchResultWithPostInfo {
+			log::error!("Entering EVM Create2");
+			log::error!(" -> Checking origin address ...");
 			T::CallOrigin::ensure_address_origin(&source, origin)?;
+
+			log::error!(" -> Creating ...");
 
 			let info = T::Runner::create2(
 				source,
@@ -301,12 +317,15 @@ pub mod pallet {
 				T::config(),
 			)?;
 
+			log::error!(" -> Check info ...");
+
 			match info {
 				CreateInfo {
 					exit_reason: ExitReason::Succeed(_),
 					value: create_address,
 					..
 				} => {
+					log::error!("Created: {:?}", create_address);
 					Pallet::<T>::deposit_event(Event::<T>::Created(create_address));
 				}
 				CreateInfo {
@@ -314,9 +333,12 @@ pub mod pallet {
 					value: create_address,
 					..
 				} => {
+					log::error!("CreatFailed {:?}", create_address);
 					Pallet::<T>::deposit_event(Event::<T>::CreatedFailed(create_address));
 				}
 			}
+
+			log::error!(" -> Finish!");
 
 			Ok(PostDispatchInfo {
 				actual_weight: Some(T::GasWeightMapping::gas_to_weight(
