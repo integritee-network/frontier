@@ -216,7 +216,7 @@ impl<'config, E: From<InvalidEvmTransactionError>> CheckEvmTransaction<'config, 
 mod tests {
 	use super::*;
 
-	#[derive(Debug, PartialEq)]
+	#[derive(Debug, PartialEq, Eq)]
 	pub enum TestError {
 		GasLimitTooLow,
 		GasLimitTooHigh,
