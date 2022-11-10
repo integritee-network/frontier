@@ -73,8 +73,7 @@ impl<'a, B: BlockT> MetaDb<'a, B> {
 				// Insert data to the meta column, static tips key.
 				(MetaKey::Tips, Some(MetaValue::Tips(hashes))) => {
 					if self.backend.meta().current_syncing_tips()?.is_empty() {
-						self
-							.backend
+						self.backend
 							.meta()
 							.write_current_syncing_tips(hashes.clone())?;
 					} else {
@@ -112,8 +111,7 @@ impl<'a, B: BlockT> MetaDb<'a, B> {
 				(MetaKey::Tips, Some(MetaValue::Tips(new_value))) => {
 					let value = self.backend.meta().current_syncing_tips()?;
 					self.confirmation_prompt(&self.cmd.operation, key, &value, new_value)?;
-					self
-						.backend
+					self.backend
 						.meta()
 						.write_current_syncing_tips(new_value.clone())?;
 				}
