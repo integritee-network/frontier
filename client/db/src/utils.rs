@@ -46,7 +46,7 @@ fn open_kvdb_rocksdb(path: &Path, create: bool) -> Result<Arc<dyn Database<DbHas
 		.to_str()
 		.ok_or_else(|| "Invalid database path".to_string())?;
 
-	let db = kvdb_rocksdb::Database::open(&db_config, &path).map_err(|err| format!("{}", err))?;
+	let db = kvdb_rocksdb::Database::open(&db_config, path).map_err(|err| format!("{}", err))?;
 	return Ok(sp_database::as_database(db));
 }
 
