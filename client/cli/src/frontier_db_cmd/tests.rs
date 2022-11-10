@@ -164,7 +164,7 @@ mod tests {
 
 		let data_before = vec![(EthereumStorageSchema::V2, H256::default())];
 
-		let _ = backend
+		backend
 			.meta()
 			.write_ethereum_schema(data_before.clone())
 			.expect("data inserted in temporary db");
@@ -197,9 +197,9 @@ mod tests {
 
 		let data = vec![(EthereumStorageSchema::V2, H256::default())];
 
-		let _ = backend
+		backend
 			.meta()
-			.write_ethereum_schema(data.clone())
+			.write_ethereum_schema(data)
 			.expect("data inserted in temporary db");
 
 		// Run the command
@@ -209,7 +209,7 @@ mod tests {
 			Operation::Read,
 			Column::Meta
 		)
-		.run(Arc::new(client), backend.clone())
+		.run(Arc::new(client), backend)
 		.is_ok());
 	}
 
@@ -254,9 +254,9 @@ mod tests {
 
 		let data = vec![(EthereumStorageSchema::V2, H256::default())];
 
-		let _ = backend
+		backend
 			.meta()
-			.write_ethereum_schema(data.clone())
+			.write_ethereum_schema(data)
 			.expect("data inserted in temporary db");
 		// Run the command
 		assert!(cmd(
@@ -314,7 +314,7 @@ mod tests {
 
 		let data_before = vec![H256::default()];
 
-		let _ = backend
+		backend
 			.meta()
 			.write_current_syncing_tips(data_before.clone())
 			.expect("data inserted in temporary db");
@@ -346,9 +346,9 @@ mod tests {
 
 		let data = vec![H256::default()];
 
-		let _ = backend
+		backend
 			.meta()
-			.write_current_syncing_tips(data.clone())
+			.write_current_syncing_tips(data)
 			.expect("data inserted in temporary db");
 		// Run the command
 		assert!(cmd(
@@ -357,7 +357,7 @@ mod tests {
 			Operation::Read,
 			Column::Meta
 		)
-		.run(Arc::new(client), backend.clone())
+		.run(Arc::new(client), backend)
 		.is_ok());
 	}
 
@@ -402,9 +402,9 @@ mod tests {
 
 		let data = vec![H256::default()];
 
-		let _ = backend
+		backend
 			.meta()
-			.write_current_syncing_tips(data.clone())
+			.write_current_syncing_tips(data)
 			.expect("data inserted in temporary db");
 		// Run the command
 		assert!(cmd(
@@ -434,9 +434,9 @@ mod tests {
 
 		let data = vec![(EthereumStorageSchema::V1, H256::default())];
 
-		let _ = backend
+		backend
 			.meta()
-			.write_ethereum_schema(data.clone())
+			.write_ethereum_schema(data)
 			.expect("data inserted in temporary db");
 
 		// Run the Create command
@@ -596,7 +596,7 @@ mod tests {
 			Operation::Create,
 			Column::Block
 		)
-		.run(Arc::clone(&client), backend.clone())
+		.run(Arc::clone(&client), backend)
 		.is_err());
 	}
 
@@ -649,7 +649,7 @@ mod tests {
 		let ethereum_block_hash = H256::default();
 		assert!(cmd(
 			format!("{:?}", ethereum_block_hash),
-			Some(test_value_path.clone()),
+			Some(test_value_path),
 			Operation::Create,
 			Column::Block
 		)
@@ -699,7 +699,7 @@ mod tests {
 		let ethereum_block_hash = H256::default();
 		assert!(cmd(
 			format!("{:?}", ethereum_block_hash),
-			Some(test_value_path.clone()),
+			Some(test_value_path),
 			Operation::Update,
 			Column::Block
 		)
@@ -770,7 +770,7 @@ mod tests {
 		let ethereum_block_hash = H256::default();
 		assert!(cmd(
 			format!("{:?}", ethereum_block_hash),
-			Some(test_value_path.clone()),
+			Some(test_value_path),
 			Operation::Create,
 			Column::Block,
 		)
@@ -794,7 +794,7 @@ mod tests {
 			Operation::Read,
 			Column::Transaction
 		)
-		.run(Arc::clone(&client), backend.clone())
+		.run(Arc::clone(&client), backend)
 		.is_ok());
 	}
 }

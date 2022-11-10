@@ -541,7 +541,7 @@ mod tests {
 			])),
 		};
 		let topics_input = if filter.topics.is_some() {
-			let filtered_params = FilteredParams::new(Some(filter.clone()));
+			let filtered_params = FilteredParams::new(Some(filter));
 			Some(filtered_params.flat_topics)
 		} else {
 			None
@@ -574,7 +574,7 @@ mod tests {
 			])),
 		};
 		let topics_input = if filter.topics.is_some() {
-			let filtered_params = FilteredParams::new(Some(filter.clone()));
+			let filtered_params = FilteredParams::new(Some(filter));
 			Some(filtered_params.flat_topics)
 		} else {
 			None
@@ -595,7 +595,7 @@ mod tests {
 			topics: Some(VariadicValue::Multiple(vec![])),
 		};
 		let topics_input = if filter.topics.is_some() {
-			let filtered_params = FilteredParams::new(Some(filter.clone()));
+			let filtered_params = FilteredParams::new(Some(filter));
 			Some(filtered_params.flat_topics)
 		} else {
 			None
@@ -693,7 +693,7 @@ mod tests {
 			])),
 		};
 		let topics_input = if filter.topics.is_some() {
-			let filtered_params = FilteredParams::new(Some(filter.clone()));
+			let filtered_params = FilteredParams::new(Some(filter));
 			Some(filtered_params.flat_topics)
 		} else {
 			None
@@ -723,7 +723,7 @@ mod tests {
 			])),
 		};
 		let topics_input = if filter.topics.is_some() {
-			let filtered_params = FilteredParams::new(Some(filter.clone()));
+			let filtered_params = FilteredParams::new(Some(filter));
 			Some(filtered_params.flat_topics)
 		} else {
 			None
