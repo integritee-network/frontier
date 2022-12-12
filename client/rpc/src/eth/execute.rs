@@ -21,9 +21,9 @@ use std::sync::Arc;
 use ethereum_types::{H256, U256};
 use evm::{ExitError, ExitReason};
 use jsonrpsee::core::RpcResult as Result;
-
+// Substrate
 use sc_client_api::backend::{Backend, StateBackend, StorageProvider};
-use sc_network::ExHashT;
+use sc_network_common::ExHashT;
 use sc_transaction_pool::ChainApi;
 use sp_api::{ApiExt, ProvideRuntimeApi};
 use sp_block_builder::BlockBuilder as BlockBuilderApi;
@@ -33,7 +33,7 @@ use sp_runtime::{
 	traits::{BlakeTwo256, Block as BlockT},
 	SaturatedConversion,
 };
-
+// Frontier
 use fc_rpc_core::types::*;
 use fp_rpc::EthereumRuntimeRPCApi;
 
