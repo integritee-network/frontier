@@ -9,7 +9,7 @@ repository = "https://github.com/paritytech/frontier/"
 
 [dependencies]
 # Substrate FRAME
-frame-support = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.32" }
+frame-support = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.32" }
 
 # Frontier
 fp-evm = { version = "3.0.0-dev", path = "../../../../primitives/evm", default-features = false }
