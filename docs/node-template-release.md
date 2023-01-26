@@ -1,6 +1,6 @@
 # Frontier Node Template Release Process
 
-> NOTE: this based on the
+> NOTE: this is based on the
 > [Subtrate node template release process](https://github.com/paritytech/substrate/blob/master/docs/node-template-release.md) -
 
 1.  Clone and checkout the `main` branch of the
