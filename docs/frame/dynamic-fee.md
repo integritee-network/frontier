@@ -8,7 +8,7 @@ the functionality of Ethereum dynamic fee adjustment.
 The pallet works by keeping track of the current minimum gas price in a
 Substrate storage `MinGasPrice`. Each Substrate block, the proposer can submit
 an inherent extrinsic `note_min_gas_price_target`. When a block is built, the
-minimum gas price is adjusted similar to Ethereum's algorithm.
+minimum gas price is adjusted similarly to Ethereum's algorithm.
 
 ## Usage
 
